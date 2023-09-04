@@ -17,10 +17,8 @@ import { Link as aLink } from 'react-router-dom';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
+      {'Copyright © '}   
+        {'Singo '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -35,10 +33,15 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const user ={email:data.get('email'),password:data.get('password'),role:'user'}
+    fetch("http://localhost:8080/user/login",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(user)
+  }).then(res=>res.json())
+  .then((result)=>{
+    console.log(result)
+  })
   };
 
   return (
@@ -96,10 +99,6 @@ export default function SignIn() {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
               <Button
                 type="submit"
                 fullWidth
@@ -111,7 +110,7 @@ export default function SignIn() {
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
-                    Forgot password?
+                    Admin Login
                   </Link>
                 </Grid>
                 <Grid item>

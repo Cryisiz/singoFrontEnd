@@ -31,8 +31,8 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const user ={firstName:data.get('firstName'),lastName:data.get('lastName'),email:data.get('email'),password:data.get('password'),role:'user'}
-    fetch("http://localhost:8080/user/add",{
+    const user ={firstname:data.get('firstName'),lastname:data.get('lastName'),email:data.get('email'),password:data.get('password'),role:'USER'}
+    fetch("http://localhost:8080/auth/register",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(user)

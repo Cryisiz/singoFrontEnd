@@ -1,6 +1,6 @@
-node_modules
-npm-debug.log
-.github
-.gitignore
-README.md
-.git
+**/node_modules
+**/npm-debug.log
+**/.github
+**/.gitignore
+**/README.md
+**/.git

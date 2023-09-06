@@ -19,10 +19,11 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 
+//Copyright
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+      {'Copyright Singo© '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
       </Link>{' '}

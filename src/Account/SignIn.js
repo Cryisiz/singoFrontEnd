@@ -13,35 +13,36 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Link from '@mui/material/Link';
 import { Link as aLink } from 'react-router-dom';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}   
-        {'Singo '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
+import { useSignIn} from 'react-auth-kit'
+import {Navigate, useNavigate} from 'react-router-dom'
+import Alert from '@mui/material/Alert';
+import axios, { AxiosError } from "axios";
+import Copyright from "../Component/Copyright";
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const [open, setOpen] = React.useState(false)
+  const signIn = useSignIn()
+  const navigate = useNavigate()
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user ={email:data.get('email'),password:data.get('password'),role:'user'}
-    fetch("http://localhost:8080/user/login",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(user)
-  }).then(res=>res.json())
-  .then((result)=>{
-    console.log(result)
-  })
+    try {
+    const res = await axios.post(
+    "http://localhost:8080/auth/authenticate",user);
+    signIn({
+      token: res.access_token,
+      tokenType: 'Bearer',   
+      authState: {name: data.get('email')},
+      expiresIn: 1440 
+    }).then(
+      navigate('/home'));
+    }catch(err) {
+    setOpen(true);
+  }
+  
   };
 
   return (
@@ -99,6 +100,9 @@ export default function SignIn() {
                 id="password"
                 autoComplete="current-password"
               />
+              {open && (
+              <Alert severity="error">Email Or Password Incorrect!</Alert>
+              )}
               <Button
                 type="submit"
                 fullWidth

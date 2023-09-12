@@ -1,8 +1,8 @@
 import Typography from '@mui/material/Typography';
 
-export function Copyright(props) {
+export function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" color="text.secondary" align="center" >
       {'Copyright © '}   
         {'Singo '}
       {new Date().getFullYear()}

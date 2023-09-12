@@ -8,5 +8,9 @@ CI/CD -Github
 Test Environment -Docker Desktop
                  -Window 11
                  -WSL Ubuntu
+
+React js -Browser Image Compression
+         -React Auth Kit
+         -mui-file-input
 </pre> 
 

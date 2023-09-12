@@ -12,31 +12,31 @@ import {ThemeProvider } from '@mui/material/styles';
 import Link from '@mui/material/Link';
 import { Link as aLink } from 'react-router-dom';
 import { useSignIn} from 'react-auth-kit'
-import { useNavigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 import Alert from '@mui/material/Alert';
 import axios, { AxiosError } from "axios";
 import Copyright from "../Component/Copyright";
 import defaultTheme from '../Component/Theme';
 
 
-export default function SignIn() {
+export default function AdminSignIn() {
   const [open, setOpen] = React.useState(false)
   const signIn = useSignIn()
   const navigate = useNavigate()
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const user ={email:data.get('email'),password:data.get('password'),role:'USER'}
+    const user ={email:data.get('email'),password:data.get('password'),role:'ADMIN'}
     try {
     const res = await axios.post(
     "http://localhost:8080/auth/authenticate",user);
     signIn({
-      token: res.data.access_token,
+      token: res.access_token,
       tokenType: 'Bearer',   
-      authState: {name: data.get('email'),role:'USER'},
+      authState: {name: data.get('email'),role:'ADMIN'},
       expiresIn: 1440 
     }).then(
-      navigate('/home'));
+      navigate('/adminhome'));
     }catch(err) {
     setOpen(true);
   }
@@ -75,9 +75,9 @@ export default function SignIn() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Admin Sign in
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -111,13 +111,8 @@ export default function SignIn() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link component={aLink} to="/adminsignin" variant="body2">
-                    Admin Login
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link component={aLink} to="/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link component={aLink} to="/" variant="body2">
+                    User Login
                   </Link>
                 </Grid>
               </Grid>

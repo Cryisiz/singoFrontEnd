@@ -11,11 +11,17 @@ import PaidIcon from '@mui/icons-material/Paid';
 import {blue} from '@mui/material/colors';
 import axios from "axios";
 import  { useEffect, useState } from "react";
+import {useAuthUser} from 'react-auth-kit'
+import { Link as aLink } from 'react-router-dom';
 
 function Activities(props){
   return(    <Grid item xs={12} sm={6} md={4}>
     <Card sx={{ maxWidth: 400,minWidth:300 }} >
-    <CardActionArea>
+    <CardActionArea component={aLink} to="/addActivities" state={{ activitiesId: props.key,
+    activitiesName: props.activitiesName, activitiesType:props.activitiesType, 
+    activitiesLocation:props.activitiesLocation, activitiesPrice:props.activitiesPrice,
+    activitiesUrl:props.activitiesUrl,activitiesAddress:props.activitiesAddress,activitiesDescription:props.activitiesDescription,
+    activitiesPhone:props.activitiesPhone,activitiesHours:props.activitiesHours}}>
         <CardMedia
           component="img"
           height="200"
@@ -30,9 +36,17 @@ function Activities(props){
     display: 'flex',
     alignItems: 'center',
     flexWrap: 'wrap',
-}}>        <AttractionsIcon style={{ color: blue[500] }}/> {props.activitiesType} &ensp;
-            <PlaceIcon style={{ color: blue[500] }}/> {props.activitiesLocation} &ensp;
+}}>   <Grid container rowSpacing={0} columnSpacing={2}>
+      <Grid item >
+  <AttractionsIcon style={{ color: blue[500] }}/> {props.activitiesType} 
+      </Grid>
+        <Grid item >
+            <PlaceIcon style={{ color: blue[500] }}/> {props.activitiesLocation}
+          </Grid>
+          <Grid item>
             <PaidIcon style={{ color: blue[500] }}/> SGD {props.activitiesPrice}
+          </Grid>
+          </Grid>
           </Typography>
         </CardContent>
         </CardActionArea>
@@ -43,12 +57,19 @@ function Activities(props){
 }
 
 export default function CardActivities() {
-
-    const [activitiesData, setActivitiesData] = useState([]);
   
-    // make the fetch the first time your component mounts
+    const auth = useAuthUser()
+    const [activitiesData, setActivitiesData] = useState([]);
+
+    //Authorization
+    const authHeader = {     
+      headers: { 
+      'Authorization': 'Bearer ' + auth().token}
+  }
+  
+    // fetch first time  component mounts
     useEffect(() => {
-      axios.get("http://localhost:8080/activitiesController/getAll").then(response => setActivitiesData(response.data));
+      axios.get("http://localhost:8080/activitiesController/getAll",authHeader).then(response => setActivitiesData(response.data));
     }, []);
   return (
     <Grid
@@ -57,7 +78,10 @@ export default function CardActivities() {
     justify="center"
   >
     {activitiesData.map((activities) => <Activities key={activities.activitiesId} activitiesName= {activities.activitiesName} activitiesType={activities.activitiesType} 
-    activitiesLocation={activities.activitiesLocation} activitiesPrice={activities.activitiesPrice} activitiesUrl={activities.activitiesUrl}/>)}
+    activitiesLocation={activities.activitiesLocation} activitiesPrice={activities.activitiesPrice} activitiesUrl={activities.activitiesUrl}
+    activitiesAddress={activities.activitiesAddress} activitiesDescription={activities.activitiesDescription} activitiesHours={activities.activitiesHours}
+    activitiesPhone={activities.activitiesPhone}
+    />)}
     </Grid>
 
   );

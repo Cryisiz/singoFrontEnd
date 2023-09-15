@@ -15,12 +15,12 @@ import { useNavigate} from 'react-router-dom'
 import Alert from '@mui/material/Alert';
 import axios from "axios";
 import imageCompression from 'browser-image-compression'
-
+import {useAuthUser} from 'react-auth-kit'
 
 export default function CreateRestaurant() {
 
+  const auth = useAuthUser()
   const [price, setPrice] = React.useState("");
-
   const handleChange = (event) => {
     setPrice(event.target.value);
   };
@@ -43,7 +43,8 @@ export default function CreateRestaurant() {
       const compressedFile = await imageCompression(file, options);
       data.append("restaurantImage",compressedFile);
       const config = {     
-        headers: { 'content-type': 'multipart/form-data' }
+        headers: { 'content-type': 'multipart/form-data',
+        'Authorization': 'Bearer ' + auth().token} //Authorization
     }
 
     //Post data to controller
@@ -82,7 +83,7 @@ export default function CreateRestaurant() {
           <Typography component="h1" variant="h5">
             Create Restaurant
           </Typography>
-          <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 , width: '30%',minWidth:300}}>
+          <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 , width: '30%',minWidth:350}}>
 
             <TextField
               required

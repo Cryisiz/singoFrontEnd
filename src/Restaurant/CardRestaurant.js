@@ -11,6 +11,7 @@ import PaidIcon from '@mui/icons-material/Paid';
 import {blue} from '@mui/material/colors';
 import axios from "axios";
 import  { useEffect, useState } from "react";
+import {useAuthUser} from 'react-auth-kit'
 
 function Restaurant(props){
   return(    <Grid item xs={12} sm={6} md={4}>
@@ -43,12 +44,19 @@ function Restaurant(props){
 }
 
 export default function CardRestaurant() {
-
+  
+    const auth = useAuthUser()
     const [restaurantData, setRestaurantData] = useState([]);
+
+    //Authorization
+    const authHeader = {     
+      headers: { 
+      'Authorization': 'Bearer ' + auth().token}
+  }
   
     // make the fetch the first time your component mounts
     useEffect(() => {
-      axios.get("http://localhost:8080/restaurantController/getAll").then(response => setRestaurantData(response.data));
+      axios.get("http://localhost:8080/restaurantController/getAll",authHeader).then(response => setRestaurantData(response.data));
     }, []);
   return (
     <Grid

@@ -14,7 +14,7 @@ import { Link as aLink } from 'react-router-dom';
 import { useSignIn} from 'react-auth-kit'
 import { useNavigate} from 'react-router-dom'
 import Alert from '@mui/material/Alert';
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import Copyright from "../Component/Copyright";
 import defaultTheme from '../Component/Theme';
 
@@ -33,7 +33,7 @@ export default function SignIn() {
     signIn({
       token: res.data.access_token,
       tokenType: 'Bearer',   
-      authState: {name: data.get('email'),role:'USER'},
+      authState: {name: data.get('email'),role:'USER',token:res.data.access_token},
       expiresIn: 1440 
     }).then(
       navigate('/home'));

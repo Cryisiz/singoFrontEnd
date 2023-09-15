@@ -12,6 +12,7 @@ import AdminHome from "./Admin/AdminHome"
 import CreateHotel from "./Admin/Hotel/CreateHotel"
 import CreateRestaurant from "./Admin/Restaurant/CreateRestaurant"
 import CreateActivities from "./Admin/Activities/CreateActivities"
+import AddActivities from "./Activities/AddActivities"
 
 export function App() {
   return (
@@ -28,7 +29,7 @@ export function App() {
             <Route path={'/viewRestaurant'} element={ <RequireAuth loginPath={'/'}> <ViewRestaurant/></RequireAuth>}/>
             <Route path={'/viewActivities'} element={ <RequireAuth loginPath={'/'}> <ViewActivities/></RequireAuth>}/>
             <Route path={'/viewHotel'} element={ <RequireAuth loginPath={'/'}> <ViewActivities/></RequireAuth>}/>
-
+            <Route path={'/addActivities'} element={ <RequireAuth loginPath={'/'}> <AddActivities/></RequireAuth>}/>
             {/*Admin*/}
             <Route path="/adminsignin" element={<AdminSignIn />} />
             {/*Secure*/}
@@ -36,6 +37,7 @@ export function App() {
             <Route path={'/createhotel'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateHotel/></RequireAuth>}/>
             <Route path={'/createRestaurant'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateRestaurant/></RequireAuth>}/>
             <Route path={'/createActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateActivities/></RequireAuth>}/>
+            
     </Routes>
     </BrowserRouter>
     </AuthProvider>

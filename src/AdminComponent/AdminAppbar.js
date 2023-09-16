@@ -14,6 +14,12 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ListItems from './AdminListItems';
 import SignOut from '../Account/SignOut';
 import Copyright from '../Component/Copyright';
+import HomeIcon from '@mui/icons-material/Home';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import {blue} from '@mui/material/colors'
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -62,7 +68,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Appbar(props) {
-
+  const nav = useNavigate()
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -121,7 +127,12 @@ export default function Appbar(props) {
     </Toolbar>
     <Divider />
     <List component="nav">
-      <ListItems/>
+    <ListItemButton onClick={() => {nav("/adminHome");}}>
+      <ListItemIcon>
+        <HomeIcon style={{ color: blue[500] }}/>
+      </ListItemIcon>
+      <ListItemText primary="Home"/>
+    </ListItemButton>
       <Divider sx={{ my: 1 }} />
       <SignOut/>
     </List>

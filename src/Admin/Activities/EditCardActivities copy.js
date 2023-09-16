@@ -17,7 +17,7 @@ import { Link as aLink } from 'react-router-dom';
 function Activities(props){
   return(    <Grid item xs={12} sm={6} md={4}>
     <Card sx={{ maxWidth: 400,minWidth:300 }} >
-    <CardActionArea component={aLink} to="/addActivities" state={{ activitiesId: props.key,
+    <CardActionArea component={aLink} to="/editActivities" state={{ activitiesId: props.activitiesId,
     activitiesName: props.activitiesName, activitiesType:props.activitiesType, 
     activitiesLocation:props.activitiesLocation, activitiesPrice:props.activitiesPrice,
     activitiesUrl:props.activitiesUrl,activitiesAddress:props.activitiesAddress,activitiesDescription:props.activitiesDescription,
@@ -29,10 +29,10 @@ function Activities(props){
           alt={props.activitiesName}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="span">
           {props.activitiesName}
           </Typography>
-          <Typography variant="body2" color="text.secondary" style={{
+          <Typography variant="body2" color="text.secondary" component="span" style={{
     display: 'flex',
     alignItems: 'center',
     flexWrap: 'wrap',
@@ -77,11 +77,11 @@ export default function CardActivities() {
     spacing={4}
     justify="center"
   >
-    {activitiesData.map((activities) => <Activities key={activities.activitiesId} activitiesName= {activities.activitiesName} activitiesType={activities.activitiesType} 
-    activitiesLocation={activities.activitiesLocation} activitiesPrice={activities.activitiesPrice} activitiesUrl={activities.activitiesUrl}
+    {activitiesData.map((activities) => <Activities key= {activities.activitiesId} activitiesId = {activities.activitiesId} activitiesName= {activities.activitiesName} 
+    activitiesType={activities.activitiesType} activitiesLocation={activities.activitiesLocation} activitiesPrice={activities.activitiesPrice} activitiesUrl={activities.activitiesUrl}
     activitiesAddress={activities.activitiesAddress} activitiesDescription={activities.activitiesDescription} activitiesHours={activities.activitiesHours}
     activitiesPhone={activities.activitiesPhone}
-    />)}
+    /> ) }
     </Grid>
 
   );

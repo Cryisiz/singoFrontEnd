@@ -17,17 +17,59 @@ import axios from "axios";
 import imageCompression from 'browser-image-compression'
 import {useAuthUser} from 'react-auth-kit'
 import Grid from '@mui/material/Grid';
+import {useLocation} from 'react-router-dom';
+import  { useEffect} from "react";
 
+function splitDay(str){
+  const items = str.split(": ");
+  const hrs = items[1].split("-");
+  return(
+  <>
+  <Grid item xs={3}> {items[0]}: </Grid>
+  <Grid item xs={4}>
+    <TextField
+      required
+      fullWidth
+      id={items[0] + "Opening"}
+      label="Opening Hour"
+      name={items[0]+"Opening"}
+      defaultValue={hrs[0]}
+      autoFocus
+    />
+  </Grid>
+  <Grid item xs={4}>
+  <TextField
+      required
+      fullWidth
+      id={items[0]+"Closing"}
+      label="Closing Hour"
+      name={items[0]+"Closing"}
+      defaultValue={hrs[1]}
+      autoFocus
+    />
+  </Grid>
+  </>
+  )
+}
 
-export default function CreateActivities() {
-    
-    const hoursList = ['Monday', 'Tuesday', 'Wednesday','Thursday','Friday','Saturday','Sunday'];
-    
-    const auth = useAuthUser()
-    const [file, setFile] = React.useState(null)
+export default function EditActivities() {
+    const location = useLocation();
+    const day = location.state.activitiesHours.split(",");
+    const auth = useAuthUser();
+    const [file, setFile] = React.useState(null);
     const handleChange1 = (newFile) => {
       setFile(newFile)
-    }
+    };
+
+    //Get File Image
+    useEffect(() => {
+      fetch(location.state.activitiesUrl)
+      .then((res) => res.blob())
+      .then((myBlob) => {
+         setFile(new File([myBlob], location.state.activitiesName+'.jpg', {type:  "image/jpg"}));
+      });
+    }, []);
+   
 
  //Compress Image
  const [open, setOpen] = React.useState(false)
@@ -45,6 +87,8 @@ export default function CreateActivities() {
    const hoursString = Monday+","+Tuesday+","+Wednesday+","+Thursday
                       +","+Friday+","+ Saturday + ","+Sunday;
    data.append("activitiesHours",hoursString);
+   data.append("activitiesId",location.state.activitiesId);
+
    const options = {
      maxSizeMB: 1,
      maxWidthOrHeight: 1920,
@@ -58,7 +102,7 @@ export default function CreateActivities() {
     }
       try {
         await axios.post(
-      "http://localhost:8080/activitiesController/add",data,config);
+      "http://localhost:8080/activitiesController/update",data,config);
        navigate('/adminhome');
       }catch(err) {
       setOpen(true);
@@ -90,7 +134,7 @@ export default function CreateActivities() {
             width: '100%'
           }}>
           <Typography component="h1" variant="h5">
-            Create Activities
+            Edit Activities
           </Typography>
           <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 , width: '30%',minWidth:350}}>
 
@@ -100,6 +144,7 @@ export default function CreateActivities() {
               id="activitiesName"
               label="Activities Name"
               name="activitiesName"
+              defaultValue={location.state.activitiesName}
               autoFocus
             />
             <h5> </h5> 
@@ -109,6 +154,7 @@ export default function CreateActivities() {
             id="activitiesType"
             label="Activities Type"
             name="activitiesType"
+            defaultValue={location.state.activitiesType}
             autoFocus
           />
 
@@ -119,6 +165,7 @@ export default function CreateActivities() {
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             label="Amount"
             name="activitiesPrice"
+            defaultValue={location.state.activitiesPrice}
             required
           />
           <h5> </h5> 
@@ -128,6 +175,7 @@ export default function CreateActivities() {
             id="activitiesPhone"
             label="Activities Phone"
             name="activitiesPhone"
+            defaultValue={location.state.activitiesPhone}
             autoFocus
           />
           <h5> </h5> 
@@ -137,6 +185,7 @@ export default function CreateActivities() {
             id="activitiesLocation"
             label="Activities Location"
             name="activitiesLocation"
+            defaultValue={location.state.activitiesLocation}
             autoFocus
           />
           <h5> </h5>
@@ -147,6 +196,7 @@ export default function CreateActivities() {
             id="activitiesAddress"
             label="Activities Address"
             name="activitiesAddress"
+            defaultValue={location.state.activitiesAddress}
             autoFocus
           />
                   <h5> </h5> 
@@ -157,35 +207,19 @@ export default function CreateActivities() {
             id="activitiesDescription"
             label="Activities Description"
             name="activitiesDescription"
+            defaultValue={location.state.activitiesDescription}
             autoFocus
           />
             <h5> </h5> 
         <Grid container spacing={2}>
-          {hoursList.map((items)=>
-          <>
-        <Grid item xs={3}> {items}: </Grid>
-        <Grid item xs={4}>
-          <TextField
-            required
-            fullWidth
-            id={items + "Opening"}
-            label="Opening Hour"
-            name={items+"Opening"}
-            autoFocus
-          />
-        </Grid>
-        <Grid item xs={4}>
-        <TextField
-            required
-            fullWidth
-            id={items+"Closing"}
-            label="Closing Hour"
-            name={items+"Closing"}
-            autoFocus
-          />
-        </Grid>
-        </>
-          )}
+          {splitDay(day[0])}
+          {splitDay(day[1])}
+          {splitDay(day[2])}
+          {splitDay(day[3])}
+          {splitDay(day[4])}
+          {splitDay(day[5])}
+          {splitDay(day[6])}
+         
         </Grid>
           <h5> </h5>
           <MuiFileInput placeholder="Insert image" value={file} id="activitiesImage" onChange={handleChange1} />

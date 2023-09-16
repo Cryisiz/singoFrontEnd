@@ -17,11 +17,12 @@ import { useNavigate} from 'react-router-dom'
 import Alert from '@mui/material/Alert';
 import axios from "axios";
 import imageCompression from 'browser-image-compression'
+import {useAuthUser} from 'react-auth-kit'
 
 export default function CreateHotel() {
-
+  
+  const auth = useAuthUser()
   const [star, setStar] = React.useState("");
-
   const handleChange = (event) => {
     setStar(event.target.value);
   };
@@ -46,7 +47,8 @@ export default function CreateHotel() {
       data.append("hotelImage",compressedFile);
 
       const config = {     
-        headers: { 'content-type': 'multipart/form-data' }
+        headers: { 'content-type': 'multipart/form-data' ,
+        'Authorization': 'Bearer ' + auth().token} //Authorization
     }
 
     //Post data to controller
@@ -85,7 +87,7 @@ export default function CreateHotel() {
           <Typography component="h1" variant="h5">
             Create Hotel
           </Typography>
-          <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 , width: '30%',minWidth:300}}>
+          <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 , width: '30%',minWidth:350}}>
 
             <TextField
               required

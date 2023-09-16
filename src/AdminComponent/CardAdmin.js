@@ -63,7 +63,7 @@ export default function CardHotel() {
     <CardActions>
       <Button variant="outlined" onClick={()=>(navigate("/createActivities"))}><AddIcon/>Create</Button>
       <Button variant="outlined" onClick={()=>(navigate("/editViewActivities"))}><CreateIcon/>Edit</Button>
-      <Button variant="outlined"><DeleteForeverIcon/>Delete</Button>
+      <Button variant="outlined" onClick={()=>(navigate("/deleteActivities"))}><DeleteForeverIcon/>Delete</Button>
     </CardActions>
     </Card>
     </Grid>

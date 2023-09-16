@@ -15,6 +15,7 @@ import CreateActivities from "./Admin/Activities/CreateActivities"
 import AddActivities from "./Activities/AddActivities"
 import EditViewActivities from "./Admin/Activities/EditViewActivities"
 import EditActivities from "./Admin/Activities/EditActivities"
+import DeleteActivities from "./Admin/Activities/DeleteActivities"
 
 export function App() {
   return (
@@ -41,6 +42,7 @@ export function App() {
             <Route path={'/createActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateActivities/></RequireAuth>}/>
             <Route path={'/editViewActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <EditViewActivities/></RequireAuth>}/>
             <Route path={'/editActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <EditActivities/></RequireAuth>}/>
+            <Route path={'/deleteActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <DeleteActivities/></RequireAuth>}/>
             
     </Routes>
     </BrowserRouter>

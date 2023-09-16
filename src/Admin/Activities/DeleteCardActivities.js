@@ -12,16 +12,13 @@ import {blue} from '@mui/material/colors';
 import axios from "axios";
 import  { useEffect, useState } from "react";
 import {useAuthUser} from 'react-auth-kit'
-import { Link as aLink } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom'
 
 function Activities(props){
+  DeleteCardActivities();
   return(    <Grid item xs={12} sm={6} md={4}>
     <Card sx={{ maxWidth: 400,minWidth:300 }} >
-    <CardActionArea component={aLink} to="/editActivities" state={{ activitiesId: props.activitiesId,
-    activitiesName: props.activitiesName, activitiesType:props.activitiesType, 
-    activitiesLocation:props.activitiesLocation, activitiesPrice:props.activitiesPrice,
-    activitiesUrl:props.activitiesUrl,activitiesAddress:props.activitiesAddress,activitiesDescription:props.activitiesDescription,
-    activitiesPhone:props.activitiesPhone,activitiesHours:props.activitiesHours}}>
+    <CardActionArea onClick={()=>DeleteCardActivities.Delete(props.activitiesId)} >
         <CardMedia
           component="img"
           height="200"
@@ -56,10 +53,11 @@ function Activities(props){
   ) ;
 }
 
-export default function CardActivities() {
+export default function DeleteCardActivities() {
   
     const auth = useAuthUser()
     const [activitiesData, setActivitiesData] = useState([]);
+    const navigate = useNavigate()
 
     //Authorization
     const authHeader = {     
@@ -71,6 +69,16 @@ export default function CardActivities() {
     useEffect(() => {
       axios.get("http://localhost:8080/activitiesController/getAll",authHeader).then(response => setActivitiesData(response.data));
     }, []);
+
+    const Delete = async(id) =>{
+
+      const data = new FormData();
+      data.append("activitiesId",id);
+      await axios.post("http://localhost:8080/activitiesController/delete",data,authHeader);
+      navigate("/adminHome");
+    }
+    DeleteCardActivities.Delete= Delete;
+
   return (
     <Grid
     container

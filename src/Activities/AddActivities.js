@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {ThemeProvider } from '@mui/material/styles';
+import Container from '@mui/material/Container';
 import defaultTheme from '../Component/Theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import Appbar from '../Component/Appbar';
@@ -8,13 +9,20 @@ import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
 import {useLocation} from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import AttractionsIcon from '@mui/icons-material/Attractions';
 import PlaceIcon from '@mui/icons-material/Place';
 import PaidIcon from '@mui/icons-material/Paid';
 import {blue} from '@mui/material/colors';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 
 export default function AddActivities() {
     const location = useLocation();
+    const day = location.state.activitiesHours.split(",");
     const addLineBreak = (str) =>str.split(' ').map((subStr) => {return (<><Grid Item xs={6}>{subStr}</Grid></>);});
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -60,15 +68,21 @@ export default function AddActivities() {
             </Typography>
             <Typography variant="subtitle1" paragraph>
             <Grid container>
-            <Grid Item xs={6}>Address: </Grid><Grid Item xs={6}>{location.state.activitiesAddress}</Grid>
+            <Grid Item xs={3}>Address: </Grid><Grid Item xs={9}>{location.state.activitiesAddress}</Grid>
             <Grid Item xs={6}> Phone: </Grid> <Grid Item xs={6}>{location.state.activitiesPhone}</Grid>
-              {(addLineBreak(location.state.activitiesHours))}
+              {(addLineBreak(day[0]))}
+              {(addLineBreak(day[1]))}
+              {(addLineBreak(day[2]))}
+              {(addLineBreak(day[3]))}
+              {(addLineBreak(day[4]))}
+              {(addLineBreak(day[5]))}
+              {(addLineBreak(day[6]))}
               </Grid>
             </Typography>
           </Grid>
           {location.state.activitiesDescription}
         </Grid>
-        
+        <Button variant="outlined"><AddIcon/>Add</Button>
         </Box>
         </Box>
       </Box>

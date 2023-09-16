@@ -13,6 +13,8 @@ import CreateHotel from "./Admin/Hotel/CreateHotel"
 import CreateRestaurant from "./Admin/Restaurant/CreateRestaurant"
 import CreateActivities from "./Admin/Activities/CreateActivities"
 import AddActivities from "./Activities/AddActivities"
+import EditViewActivities from "./Admin/Activities/EditViewActivities"
+import EditActivities from "./Admin/Activities/EditActivities"
 
 export function App() {
   return (
@@ -37,6 +39,8 @@ export function App() {
             <Route path={'/createhotel'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateHotel/></RequireAuth>}/>
             <Route path={'/createRestaurant'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateRestaurant/></RequireAuth>}/>
             <Route path={'/createActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateActivities/></RequireAuth>}/>
+            <Route path={'/editViewActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <EditViewActivities/></RequireAuth>}/>
+            <Route path={'/editActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <EditActivities/></RequireAuth>}/>
             
     </Routes>
     </BrowserRouter>

@@ -29,18 +29,15 @@ function Activities(props){
           <Typography gutterBottom variant="h5" component="span">
           {props.activitiesName}
           </Typography>
-          <Typography variant="body2" color="text.secondary" component="span" style={{
-    display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-}}>   <Grid container rowSpacing={0} columnSpacing={2}>
-      <Grid item >
+          <Typography variant="body2" color="text.secondary" component="span">   
+          <Grid container rowSpacing={0} columnSpacing={2}>
+      <Grid item sx={{ display: "flex", alignItems: "center" }}>
   <AttractionsIcon style={{ color: blue[500] }}/> {props.activitiesType} 
       </Grid>
-        <Grid item >
+        <Grid item sx={{ display: "flex", alignItems: "center" }}>
             <PlaceIcon style={{ color: blue[500] }}/> {props.activitiesLocation}
           </Grid>
-          <Grid item>
+          <Grid item sx={{ display: "flex", alignItems: "center" }}>
             <PaidIcon style={{ color: blue[500] }}/> SGD {props.activitiesPrice}
           </Grid>
           </Grid>

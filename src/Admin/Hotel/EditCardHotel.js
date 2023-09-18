@@ -17,7 +17,7 @@ import { Link as aLink } from 'react-router-dom';
 function Hotel(props){
   return(    <Grid item xs={12} sm={6} md={4}>
     <Card sx={{ maxWidth: 400,minWidth:300 }} >
-    <CardActionArea component={aLink} to="/addHotel" state={{ hotelId: props.hotelId,
+    <CardActionArea component={aLink} to="/editHotel" state={{ hotelId: props.hotelId,
     hotelName: props.hotelName, hotelStar:props.hotelStar, 
     hotelLocation:props.hotelLocation, hotelPrice:props.hotelPrice,
     hotelUrl:props.hotelUrl,hotelAddress:props.hotelAddress,hotelDescription:props.hotelDescription,
@@ -53,7 +53,7 @@ function Hotel(props){
   ) ;
 }
 
-export default function CardHotel() {
+export default function EditCardHotel() {
 
     const auth = useAuthUser()
     const [hotelData, setHotelData] = useState([]);

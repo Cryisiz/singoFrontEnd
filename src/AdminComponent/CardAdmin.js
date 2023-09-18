@@ -32,7 +32,7 @@ export default function CardHotel() {
     </CardContent>
     <CardActions>
       <Button variant="outlined" onClick={()=>(navigate("/createhotel"))}><AddIcon/>Create</Button>
-      <Button variant="outlined"><CreateIcon/>Edit</Button>
+      <Button variant="outlined" onClick={()=>(navigate("/editViewHotel"))}><CreateIcon/>Edit</Button>
       <Button variant="outlined"><DeleteForeverIcon/>Delete</Button>
     </CardActions>
     </Card>
@@ -47,7 +47,7 @@ export default function CardHotel() {
     </CardContent>
     <CardActions>
       <Button variant="outlined" onClick={()=>(navigate("/createRestaurant"))}><AddIcon/>Create</Button>
-      <Button variant="outlined"><CreateIcon/>Edit</Button>
+      <Button variant="outlined" ><CreateIcon/>Edit</Button>
       <Button variant="outlined"><DeleteForeverIcon/>Delete</Button>
     </CardActions>
     </Card>

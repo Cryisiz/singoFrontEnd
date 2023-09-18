@@ -51,13 +51,13 @@ export default function AddActivities() {
             <Grid sx={{ minWidth:350 }}>
            <img src={location.state.activitiesUrl} alt={location.state.activitiesName} height='250' width='350'/>
            <Grid container rowSpacing={0} columnSpacing={2}  sx={{ width:350 }}>
-      <Grid item >
+      <Grid item sx={{ display: "flex", alignItems: "center" }}>
         <AttractionsIcon style={{ color: blue[500] }}/> {location.state.activitiesType} 
       </Grid>
-        <Grid item >
+        <Grid item sx={{ display: "flex", alignItems: "center" }}>
             <PlaceIcon style={{ color: blue[500] }}/> {location.state.activitiesLocation}
           </Grid>
-          <Grid item>
+          <Grid item sx={{ display: "flex", alignItems: "center" }}>
             <PaidIcon style={{ color: blue[500] }}/> SGD {location.state.activitiesPrice}
           </Grid>
           </Grid>

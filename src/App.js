@@ -19,6 +19,7 @@ import DeleteActivities from "./Admin/Activities/DeleteActivities"
 import AddHotel from "./Hotel/AddHotel"
 import EditViewHotel from "./Admin/Hotel/EditViewHotel"
 import EditHotel from "./Admin/Hotel/EditHotel"
+import DeleteHotel from "./Admin/Hotel/DeleteHotel"
 
 export function App() {
   return (
@@ -34,19 +35,23 @@ export function App() {
             <Route path={'/viewHotel'} element={ <RequireAuth loginPath={'/'}> <ViewHotel/></RequireAuth>}/>
             <Route path={'/viewRestaurant'} element={ <RequireAuth loginPath={'/'}> <ViewRestaurant/></RequireAuth>}/>
             <Route path={'/viewActivities'} element={ <RequireAuth loginPath={'/'}> <ViewActivities/></RequireAuth>}/>
-            <Route path={'/viewHotel'} element={ <RequireAuth loginPath={'/'}> <ViewActivities/></RequireAuth>}/>
+            {/*Add*/}
             <Route path={'/addActivities'} element={ <RequireAuth loginPath={'/'}> <AddActivities/></RequireAuth>}/>
             <Route path={'/addHotel'} element={ <RequireAuth loginPath={'/'}> <AddHotel/></RequireAuth>}/>
+
             {/*Admin*/}
             <Route path="/adminsignin" element={<AdminSignIn />} />
             {/*Secure*/}
             <Route path={'/adminhome'} element={ <RequireAuth loginPath={'/adminsignin'}> <AdminHome/></RequireAuth>}/>
+            {/*Hotel"*/}
             <Route path={'/createhotel'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateHotel/></RequireAuth>}/>
             <Route path={'/editViewHotel'} element={ <RequireAuth loginPath={'/adminsignin'}> <EditViewHotel/></RequireAuth>}/>
             <Route path={'/edithotel'} element={ <RequireAuth loginPath={'/adminsignin'}> <EditHotel/></RequireAuth>}/>
-
+            <Route path={'/deleteHotel'} element={ <RequireAuth loginPath={'/adminsignin'}> <DeleteHotel/></RequireAuth>}/>
+            {/*Restaurant"*/}
             <Route path={'/createRestaurant'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateRestaurant/></RequireAuth>}/>
 
+            {/*Activities"*/}
             <Route path={'/createActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <CreateActivities/></RequireAuth>}/>
             <Route path={'/editViewActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <EditViewActivities/></RequireAuth>}/>
             <Route path={'/editActivities'} element={ <RequireAuth loginPath={'/adminsignin'}> <EditActivities/></RequireAuth>}/>

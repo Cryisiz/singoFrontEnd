@@ -50,7 +50,7 @@ export default function AddHotel() {
            <Grid container sx={{ display: 'flex', alignItems: 'center',width: '50%',minWidth:350 }} spacing={2}>
             <Grid sx={{ minWidth:350 }}>
            <img src={location.state.hotelUrl} alt={location.state.hotelName} height='250' width='350'/>
-           <Grid container rowSpacing={0} columnSpacing={2}  sx={{ width:350 }}>
+           <Grid container rowSpacing={0} columnSpacing={2} >
               <Grid item sx={{ display: "flex", alignItems: "center" }}>
             <StarIcon style={{ color: blue[500] }}/> {location.state.hotelStar} star
             </Grid>

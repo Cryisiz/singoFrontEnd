@@ -16,6 +16,7 @@ import AddActivities from "./Activities/AddActivities"
 import EditViewActivities from "./Admin/Activities/EditViewActivities"
 import EditActivities from "./Admin/Activities/EditActivities"
 import DeleteActivities from "./Admin/Activities/DeleteActivities"
+import AddHotel from "./Hotel/AddHotel"
 
 export function App() {
   return (
@@ -33,6 +34,7 @@ export function App() {
             <Route path={'/viewActivities'} element={ <RequireAuth loginPath={'/'}> <ViewActivities/></RequireAuth>}/>
             <Route path={'/viewHotel'} element={ <RequireAuth loginPath={'/'}> <ViewActivities/></RequireAuth>}/>
             <Route path={'/addActivities'} element={ <RequireAuth loginPath={'/'}> <AddActivities/></RequireAuth>}/>
+            <Route path={'/addHotel'} element={ <RequireAuth loginPath={'/'}> <AddHotel/></RequireAuth>}/>
             {/*Admin*/}
             <Route path="/adminsignin" element={<AdminSignIn />} />
             {/*Secure*/}

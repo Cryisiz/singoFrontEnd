@@ -45,6 +45,8 @@ export default function CreateHotel() {
     }
     const compressedFile = await imageCompression(file, options);
       data.append("hotelImage",compressedFile);
+    const hotelHrs = "Check-in: "+data.get("checkIn")+","+"Check-out: "+data.get("checkOut");
+    data.append("hotelHours",hotelHrs);
 
       const config = {     
         headers: { 'content-type': 'multipart/form-data' ,
@@ -118,15 +120,6 @@ export default function CreateHotel() {
             <MenuItem value={9}>9</MenuItem>
             <MenuItem value={10}>10</MenuItem>
           </Select>
-          <h5> </h5>
-          <TextField
-            required
-            fullWidth
-            id="hotelLocation"
-            label="Hotel Location"
-            name="hotelLocation"
-            autoFocus
-          />
           <InputLabel id="hotelPrice">Price</InputLabel>
           <OutlinedInput
             id="hotelPrice"
@@ -136,6 +129,62 @@ export default function CreateHotel() {
             required
           />
            <h5> </h5>
+           <TextField
+            required
+            fullWidth
+            id="hotelPhone"
+            label="Hotel Phone"
+            name="hotelPhone"
+            autoFocus
+          />
+          <h5> </h5> 
+          <TextField
+            required
+            fullWidth
+            id="hotelLocation"
+            label="Hotel Location"
+            name="hotelLocation"
+            autoFocus
+          />
+          <h5> </h5>
+          <TextField
+          multiline
+            required
+            fullWidth
+            id="hotelAddress"
+            label="Hotel Address"
+            name="hotelAddress"
+            autoFocus
+          />
+          <h5> </h5> 
+          <TextField
+          multiline
+            required
+            fullWidth
+            id="hotelDescription"
+            label="Hotel Description"
+            name="hotelDescription"
+            autoFocus
+          />
+            <h5> </h5>
+            <TextField
+            required
+            fullWidth
+            id="checkIn"
+            label="Hotel Check-in time"
+            name="checkIn"
+            autoFocus
+          />
+          <h5> </h5>
+          <TextField
+            required
+            fullWidth
+            id="checkOut"
+            label="Hotel Check-out time"
+            name="checkOut"
+            autoFocus
+          />
+          <h5> </h5>
           <MuiFileInput placeholder="Insert image" value={file} id="hotelImage" onChange={handleChange1} />
           {open && (
               <Alert severity="error">Error</Alert>

@@ -12,6 +12,7 @@ import {blue} from '@mui/material/colors';
 import axios from "axios";
 import  { useEffect, useState } from "react";
 import {useAuthUser} from 'react-auth-kit'
+import { Link as aLink } from 'react-router-dom';
 
 function Hotel(props){
   return(    <Grid item xs={12} sm={6} md={4}>
@@ -32,7 +33,7 @@ function Hotel(props){
           {props.hotelName}
           </Typography>
           <Typography variant="body2" color="text.secondary">         
-           <Grid container rowSpacing={0} columnSpacing={2} alignItems="center" sx={{ display: "flex", alignItems: "center" }}>
+           <Grid container rowSpacing={0} columnSpacing={2} alignItems="center">
               <Grid item sx={{ display: "flex", alignItems: "center" }}>
             <StarIcon style={{ color: blue[500] }}/> {props.hotelStar} star
             </Grid>

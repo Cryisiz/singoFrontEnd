@@ -16,9 +16,11 @@ import Alert from '@mui/material/Alert';
 import axios from "axios";
 import imageCompression from 'browser-image-compression'
 import {useAuthUser} from 'react-auth-kit'
+import Grid from '@mui/material/Grid';
 
 export default function CreateRestaurant() {
 
+  const hoursList = ['Monday', 'Tuesday', 'Wednesday','Thursday','Friday','Saturday','Sunday'];
   const auth = useAuthUser()
   const [price, setPrice] = React.useState("");
   const handleChange = (event) => {
@@ -35,6 +37,16 @@ export default function CreateRestaurant() {
     const handleSubmit = async (event) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
+      const Monday = "Monday: "+ data.get("MondayOpening")+"-"+data.get("MondayClosing");
+      const Tuesday = "Tuesday: "+data.get("TuesdayOpening")+"-"+data.get("TuesdayClosing");
+      const Wednesday = "Wednesday: "+data.get("WednesdayOpening")+"-"+data.get("WednesdayClosing");
+      const Thursday = "Thursday: "+data.get("ThursdayOpening")+"-"+data.get("ThursdayClosing");
+      const Friday = "Friday: " + data.get("FridayOpening")+"-"+data.get("FridayClosing");
+      const Saturday = "Saturday: "+data.get("SaturdayOpening")+"-"+data.get("SaturdayClosing");
+      const Sunday = "Sunday: "+data.get("SundayOpening")+"-"+data.get("SundayClosing");
+      const hoursString = Monday+","+Tuesday+","+Wednesday+","+Thursday
+                         +","+Friday+","+ Saturday + ","+Sunday;
+      data.append("restaurantHours",hoursString);
       const options = {
         maxSizeMB: 1,
         maxWidthOrHeight: 1920,
@@ -93,6 +105,8 @@ export default function CreateRestaurant() {
               name="restaurantName"
               autoFocus
             />
+
+        <h5> </h5>
         <InputLabel id="restaurantPrice">Price</InputLabel>
           <Select
             labelId="restaurantPrice"
@@ -110,15 +124,6 @@ export default function CreateRestaurant() {
             <MenuItem value={'$$$$$'}>$$$$</MenuItem>
           </Select>
           <h5> </h5>
-          <TextField
-            required
-            fullWidth
-            id="restaurantLocation"
-            label="Restaurant Location"
-            name="restaurantLocation"
-            autoFocus
-          />
-          <h5> </h5>
             <TextField
               required
               fullWidth
@@ -127,6 +132,74 @@ export default function CreateRestaurant() {
               name="restaurantType"
               autoFocus
             />
+
+          <h5> </h5> 
+          <TextField
+            required
+            fullWidth
+            id="restaurantPhone"
+            label="Restaurant Phone"
+            name="restaurantPhone"
+            autoFocus
+          />
+          <h5> </h5>
+          <TextField
+            required
+            fullWidth
+            id="restaurantLocation"
+            label="Restaurant Location"
+            name="restaurantLocation"
+            autoFocus
+          />
+                    <h5> </h5>
+          <TextField
+          multiline
+            required
+            fullWidth
+            id="restaurantAddress"
+            label="Restaurant Address"
+            name="restaurantAddress"
+            autoFocus
+          />
+                  <h5> </h5> 
+          <TextField
+          multiline
+            required
+            fullWidth
+            id="restaurantDescription"
+            label="Restaurant Description"
+            name="restaurantDescription"
+            autoFocus
+          />
+            <h5> </h5> 
+        <Grid container spacing={2}>
+          {hoursList.map((items)=>
+          <>
+        <Grid item xs={3}> {items}: </Grid>
+        <Grid item xs={4}>
+          <TextField
+            required
+            fullWidth
+            id={items + "Opening"}
+            label="Opening Hour"
+            name={items+"Opening"}
+            autoFocus
+          />
+        </Grid>
+        <Grid item xs={4}>
+        <TextField
+            required
+            fullWidth
+            id={items+"Closing"}
+            label="Closing Hour"
+            name={items+"Closing"}
+            autoFocus
+          />
+        </Grid>
+        </>
+          )}
+        </Grid>
+  
 
            <h5> </h5>
           <MuiFileInput placeholder="Insert image" value={file} id="restaurantImage" onChange={handleChange1} />

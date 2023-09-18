@@ -20,15 +20,15 @@ import {blue} from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 
-export default function AddActivities() {
+export default function AddRestaurant() {
     const location = useLocation();
-    const day = location.state.activitiesHours.split(",");
+    const day = location.state.restaurantHours.split(",");
     const addLineBreak = (str) =>str.split(' ').map((subStr) => {return (<><Grid Item xs={6}>{subStr}</Grid></>);});
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Appbar title = "Add Activities"/>
+        <Appbar title = "Add Restaurant"/>
         <Box
           component="main"
           sx={{
@@ -49,27 +49,27 @@ export default function AddActivities() {
           }}>
            <Grid container sx={{ display: 'flex', alignItems: 'center',width: '50%',minWidth:350 }} spacing={2}>
             <Grid sx={{ minWidth:350 }}>
-           <img src={location.state.activitiesUrl} alt={location.state.activitiesName} height='250' width='350'/>
-           <Grid container rowSpacing={0} columnSpacing={2}>
+           <img src={location.state.restaurantUrl} alt={location.state.restaurantName} height='250' width='350'/>
+           <Grid container rowSpacing={0} columnSpacing={2}  >
       <Grid item sx={{ display: "flex", alignItems: "center" }}>
-        <AttractionsIcon style={{ color: blue[500] }}/> {location.state.activitiesType} 
+        <AttractionsIcon style={{ color: blue[500] }}/> {location.state.restaurantType} 
       </Grid>
         <Grid item sx={{ display: "flex", alignItems: "center" }}>
-            <PlaceIcon style={{ color: blue[500] }}/> {location.state.activitiesLocation}
+            <PlaceIcon style={{ color: blue[500] }}/> {location.state.restaurantLocation}
           </Grid>
           <Grid item sx={{ display: "flex", alignItems: "center" }}>
-            <PaidIcon style={{ color: blue[500] }}/> SGD {location.state.activitiesPrice}
+            <PaidIcon style={{ color: blue[500] }}/> SGD {location.state.restaurantPrice}
           </Grid>
           </Grid>
           </Grid>
           <Grid item xs={6} sx={{ minWidth:350 }}>         
             <Typography component="h2" variant="h5">
-              {location.state.activitiesName}
+              {location.state.restaurantName}
             </Typography>
             <Typography variant="subtitle1" paragraph>
             <Grid container>
-            <Grid Item xs={3}>Address: </Grid><Grid Item xs={9}>{location.state.activitiesAddress}</Grid>
-            <Grid Item xs={6}> Phone: </Grid> <Grid Item xs={6}>{location.state.activitiesPhone}</Grid>
+            <Grid Item xs={3}>Address: </Grid><Grid Item xs={9}>{location.state.restaurantAddress}</Grid>
+            <Grid Item xs={6}> Phone: </Grid> <Grid Item xs={6}>{location.state.restaurantPhone}</Grid>
               {(addLineBreak(day[0]))}
               {(addLineBreak(day[1]))}
               {(addLineBreak(day[2]))}
@@ -80,7 +80,7 @@ export default function AddActivities() {
               </Grid>
             </Typography>
           </Grid>
-          {location.state.activitiesDescription}
+          {location.state.restaurantDescription}
         </Grid>
         <Button variant="outlined"><AddIcon/>Add</Button>
         </Box>

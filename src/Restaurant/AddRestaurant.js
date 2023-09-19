@@ -50,7 +50,7 @@ export default function AddRestaurant() {
            <Grid container sx={{ display: 'flex', alignItems: 'center',width: '50%',minWidth:350 }} spacing={2}>
             <Grid sx={{ minWidth:350 }}>
            <img src={location.state.restaurantUrl} alt={location.state.restaurantName} height='250' width='350'/>
-           <Grid container rowSpacing={0} columnSpacing={2}  >
+           <Grid container rowSpacing={0} columnSpacing={2}  sx={{width:350}} >
       <Grid item sx={{ display: "flex", alignItems: "center" }}>
         <AttractionsIcon style={{ color: blue[500] }}/> {location.state.restaurantType} 
       </Grid>

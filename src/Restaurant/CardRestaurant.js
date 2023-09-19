@@ -32,18 +32,14 @@ function Restaurant(props){
           <Typography gutterBottom variant="h5" component="div">
           {props.restaurantName}
           </Typography>
-          <Typography variant="body2" color="text.secondary" style={{
-    display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-}}>   <Grid container rowSpacing={0} columnSpacing={2}>
-      <Grid item >
+          <Typography variant="body2" color="text.secondary">   <Grid container rowSpacing={0} columnSpacing={2}>
+      <Grid item sx = {{ display: "flex", alignItems: "center" }}>
   <DinnerDiningIcon style={{ color: blue[500] }}/> {props.restaurantType} 
       </Grid>
-        <Grid item >
+        <Grid item sx = {{ display: "flex", alignItems: "center" }}>
             <PlaceIcon style={{ color: blue[500] }}/> {props.restaurantLocation}
           </Grid>
-          <Grid item>
+          <Grid item sx = {{ display: "flex", alignItems: "center" }}>
             <PaidIcon style={{ color: blue[500] }}/> {props.restaurantPrice}
           </Grid>
           </Grid>

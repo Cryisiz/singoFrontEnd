@@ -34,7 +34,7 @@ function Activities(props){
           </Typography>
           <Typography variant="body2" color="text.secondary" component="span">   
           <Grid container rowSpacing={0} columnSpacing={2}>
-      <Grid item sx={{ display: "flex", alignItems: "center" }}>
+      <Grid item sx={{ display: "flex", alignItems: "center"  }}>
   <AttractionsIcon style={{ color: blue[500] } }/> {props.activitiesType} 
       </Grid>
         <Grid item sx={{ display: "flex", alignItems: "center" }}>

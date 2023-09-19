@@ -46,6 +46,14 @@ function Itinerary(props){
         axios.post("http://localhost:8080/itineraryController/update",data,authHeader);
         window.location.reload(); 
       }
+
+    //Delete
+    const remove = (id) =>{
+        const data = new FormData();
+        data.append("itineraryId",id);
+        axios.post("http://localhost:8080/itineraryController/delete",data,authHeader);
+        window.location.reload(); 
+      }
   return( 
     <Grid item xs={12} sm={6} md={4}>
     <Card sx={{ maxWidth: 400, minWidth: 300 }}>
@@ -65,7 +73,7 @@ function Itinerary(props){
       <Button color="primary" onClick={handleClickOpen}>
           Edit
         </Button>
-        <Button  color="primary">
+        <Button  color="primary" onClick={()=>remove(props.itineraryId)}>
           Delete
         </Button>
       <Dialog open={open} onClose={handleClose}fullWidth={true}  maxWidth={'sm'} validate component="form" onSubmit={handleSubmit}>

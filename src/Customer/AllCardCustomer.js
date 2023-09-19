@@ -31,6 +31,15 @@ function Itinerary(props){
         const handleClose = () => {
           setOpen(false);
         };
+        const [open1, setOpen1] = React.useState(false);
+
+        const handleClickOpen1 = () => {
+          setOpen1(true);
+        };
+    
+        const handleClose1 = () => {
+          setOpen1(false);
+        };
         const auth = useAuthUser()
         const navigate = useNavigate()
         //Authorization
@@ -43,7 +52,17 @@ function Itinerary(props){
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         data.append("itineraryId",props.itineraryId)
+        data.append("itineraryEmail",props.itineraryEmail)
         axios.post("http://localhost:8080/itineraryController/update",data,authHeader);
+        window.location.reload(); 
+      }
+
+    //Add User
+    const handleSubmit1 = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        data.append("itineraryId",props.itineraryId)
+        axios.post("http://localhost:8080/itineraryController/addUser",data,authHeader);
         window.location.reload(); 
       }
 
@@ -75,6 +94,9 @@ function Itinerary(props){
         </Button>
         <Button  color="primary" onClick={()=>remove(props.itineraryId)}>
           Delete
+        </Button>
+        <Button color="primary" onClick={handleClickOpen1}>
+          Add User
         </Button>
       <Dialog open={open} onClose={handleClose}fullWidth={true}  maxWidth={'sm'} validate component="form" onSubmit={handleSubmit}>
         
@@ -142,6 +164,25 @@ function Itinerary(props){
       <Button type="submit">Confirm</Button>
     </DialogActions>
   </Dialog>
+  <Dialog open={open1} onClose={handleClose1}fullWidth={true}  maxWidth={'sm'} validate component="form" onSubmit={handleSubmit1}>
+        
+        <DialogTitle>Add User</DialogTitle>
+        <DialogContent  >
+        <DialogContentText>
+            User Email
+          </DialogContentText>
+        <TextField
+              required
+              id="addUserEmail"
+              name="addUserEmail"
+              autoFocus
+            />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose1}>Cancel</Button>
+          <Button type="submit">Confirm</Button>
+        </DialogActions>
+      </Dialog>
     </Card>
     </Grid>  
   ) ;

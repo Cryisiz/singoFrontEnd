@@ -45,7 +45,7 @@ export default function CardCustomer() {
       const data = new FormData(event.currentTarget);
       data.append("itineraryEmail",auth().name)
       axios.post("http://localhost:8080/itineraryController/add",data,authHeader);
-      navigate();
+      window.location.reload(); 
     }
 
   return (

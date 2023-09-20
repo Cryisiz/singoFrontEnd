@@ -51,8 +51,8 @@ function Itinerary(props){
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        data.append("itineraryId",props.itineraryId)
-        data.append("itineraryEmail",props.itineraryEmail)
+        data.append("itineraryId",props.itineraryId);
+        data.append("itineraryEmail",props.itineraryEmail);
         axios.post("http://localhost:8080/itineraryController/update",data,authHeader);
         window.location.reload(); 
       }
@@ -76,7 +76,7 @@ function Itinerary(props){
   return( 
     <Grid item xs={12} sm={6} md={4}>
     <Card sx={{ maxWidth: 400, minWidth: 300 }}>
-      <CardActionArea>
+      <CardActionArea component={aLink} to="/dayCustomer" state={{itineraryId:props.itineraryId}}>
         <CardMedia
           component="img"
           height="200"

@@ -40,14 +40,14 @@ export default function AddActivities() {
       data.append("planType","ACTIVITIES");
       data.append("planEventId",location.state.activitiesId);
       data.append("planDayId",dayId);
-      axios.post("http://localhost:8080/dayController/addHotel",data,config);
+      axios.post("http://localhost:8080/planController/addPlan",data,config);
       nav("/viewItinerary");
     }
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Appbar title = "Add Activities"/>
+        <Appbar title = "Activities"/>
         <Box
           component="main"
           sx={{

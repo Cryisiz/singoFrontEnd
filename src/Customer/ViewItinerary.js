@@ -3,18 +3,19 @@ import {ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import defaultTheme from '../Component/Theme';
 import CssBaseline from '@mui/material/CssBaseline';
-import CardActivities from './CardActivities';
+import CardItinerary from './CardItinerary';
 import Appbar from '../Component/ItineraryAppbar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
-export default function ViewActivities() {
+export default function ViewItinerary() {
+    const dayName = sessionStorage.getItem("storeDayName");
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Appbar title = "Activities"/>
+        <Appbar title = {"Day "+dayName} />
         <Box
           component="main"
           sx={{
@@ -27,7 +28,7 @@ export default function ViewActivities() {
         
            <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <CardActivities/>
+          <CardItinerary />
             </Container>
         </Box>
       </Box>

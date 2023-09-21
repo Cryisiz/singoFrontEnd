@@ -173,7 +173,7 @@ export default function CreateRestaurant() {
           />
             <h5> </h5> 
         <Grid container spacing={2}>
-          {hoursList.map((items)=>
+          {React.Children.toArray(hoursList.map((items)=>
           <>
         <Grid item xs={3}> {items}: </Grid>
         <Grid item xs={4}>
@@ -197,7 +197,7 @@ export default function CreateRestaurant() {
           />
         </Grid>
         </>
-          )}
+          ))}
         </Grid>
   
 

@@ -32,7 +32,8 @@ function Restaurant(props){
           <Typography gutterBottom variant="h5" component="div">
           {props.restaurantName}
           </Typography>
-          <Typography variant="body2" color="text.secondary">   <Grid container rowSpacing={0} columnSpacing={2}>
+          <Typography variant="body2" color="text.secondary" component="span">  
+           <Grid container rowSpacing={0} columnSpacing={2}>
       <Grid item sx = {{ display: "flex", alignItems: "center" }}>
   <DinnerDiningIcon style={{ color: blue[500] }}/> {props.restaurantType} 
       </Grid>

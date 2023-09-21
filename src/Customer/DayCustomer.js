@@ -16,7 +16,7 @@ export default function DayCustomer() {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Appbar title = "Hotel"/>
+        <Appbar title = "Home"/>
         <Box
           component="main"
           sx={{

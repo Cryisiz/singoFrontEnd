@@ -9,14 +9,19 @@ import {blue} from '@mui/material/colors';
 import axios from "axios";
 import  { useEffect, useState } from "react";
 import {useAuthUser} from 'react-auth-kit'
-import { Link as aLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 function Day(props){
+  const nav = useNavigate();
+  const storeId = ()=>{
+    sessionStorage.setItem("storeDayId", props.dayId);
+    sessionStorage.setItem("storeDayName", props.dayName);
+    nav("/viewItinerary");
+  }
   return(    <Grid item xs={12} sm={6} md={4}>
     <Card sx={{ maxWidth: 400,minWidth:300 }} >
-    <CardActionArea component={aLink} to="/addDay" state={{ dayId: props.dayId,
-    dayName: props.dayName, dayDate:props.dayDate, 
-    dayItineraryId:props.dayItineraryId}}>
+    <CardActionArea onClick={storeId}>
         <CardMedia
           component="img"
           height="200"

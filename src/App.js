@@ -25,6 +25,7 @@ import EditRestaurant from "./Admin/Restaurant/EditRestaurant"
 import EditViewRestaurant from "./Admin/Restaurant/EditViewRestaurant"
 import DeleteRestaurant from "./Admin/Restaurant/DeleteRestaurant"
 import DayCustomer from "./Customer/DayCustomer"
+import ViewItinerary from "./Customer/ViewItinerary"
 
 export function App() {
   return (
@@ -41,6 +42,7 @@ export function App() {
             <Route path={'/viewRestaurant'} element={ <RequireAuth loginPath={'/'}> <ViewRestaurant/></RequireAuth>}/>
             <Route path={'/viewActivities'} element={ <RequireAuth loginPath={'/'}> <ViewActivities/></RequireAuth>}/>
             <Route path={'/dayCustomer'} element={ <RequireAuth loginPath={'/'}> <DayCustomer/></RequireAuth>}/>
+            <Route path={'/viewItinerary'} element={ <RequireAuth loginPath={'/'}> <ViewItinerary/></RequireAuth>}/>
             {/*Add*/}
             <Route path={'/addActivities'} element={ <RequireAuth loginPath={'/'}> <AddActivities/></RequireAuth>}/>
             <Route path={'/addHotel'} element={ <RequireAuth loginPath={'/'}> <AddHotel/></RequireAuth>}/>

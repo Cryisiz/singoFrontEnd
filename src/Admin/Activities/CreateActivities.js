@@ -161,9 +161,10 @@ export default function CreateActivities() {
           />
             <h5> </h5> 
         <Grid container spacing={2}>
-          {hoursList.map((items)=>
+          {React.Children.toArray(hoursList.map((items)=>
           <>
-        <Grid item xs={3}> {items}: </Grid>
+
+        <Grid item xs={3} > {items}: </Grid>
         <Grid item xs={4}>
           <TextField
             required
@@ -185,7 +186,7 @@ export default function CreateActivities() {
           />
         </Grid>
         </>
-          )}
+          ))}
         </Grid>
           <h5> </h5>
           <MuiFileInput placeholder="Insert image" value={file} id="activitiesImage" onChange={handleChange1} />

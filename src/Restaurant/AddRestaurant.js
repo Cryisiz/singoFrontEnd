@@ -23,7 +23,7 @@ import AddIcon from '@mui/icons-material/Add';
 export default function AddRestaurant() {
     const location = useLocation();
     const day = location.state.restaurantHours.split(",");
-    const addLineBreak = (str) =>str.split(' ').map((subStr) => {return (<><Grid Item xs={6}>{subStr}</Grid></>);});
+    const addLineBreak = (str) =>React.Children.toArray(str.split(' ').map((subStr) => {return (<><Grid item xs={6}>{subStr}</Grid></>);}));
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -41,7 +41,7 @@ export default function AddRestaurant() {
            <Toolbar />
            <Box
           sx={{
-            marginTop: 1,
+            marginTop: 5,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -63,13 +63,13 @@ export default function AddRestaurant() {
           </Grid>
           </Grid>
           <Grid item xs={6} sx={{ minWidth:350 }}>         
-            <Typography component="h2" variant="h5">
+            <Typography component="span" variant="h5">
               {location.state.restaurantName}
             </Typography>
-            <Typography variant="subtitle1" paragraph>
+            <Typography variant="subtitle1" paragraph component="span">
             <Grid container>
-            <Grid Item xs={3}>Address: </Grid><Grid Item xs={9}>{location.state.restaurantAddress}</Grid>
-            <Grid Item xs={6}> Phone: </Grid> <Grid Item xs={6}>{location.state.restaurantPhone}</Grid>
+            <Grid item xs={3}>Address: </Grid><Grid item xs={9}>{location.state.restaurantAddress}</Grid>
+            <Grid item xs={6}> Phone: </Grid> <Grid item xs={6}>{location.state.restaurantPhone}</Grid>
               {(addLineBreak(day[0]))}
               {(addLineBreak(day[1]))}
               {(addLineBreak(day[2]))}

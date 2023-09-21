@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import defaultTheme from '../Component/Theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import CardHotel from './CardHotel';
-import Appbar from '../Component/Appbar';
+import Appbar from '../Component/ItineraryAppbar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
@@ -27,7 +27,7 @@ export default function ViewHotel() {
         
            <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <CardHotel/>
+          <CardHotel />
             </Container>
         </Box>
       </Box>

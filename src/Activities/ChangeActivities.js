@@ -18,29 +18,28 @@ import PlaceIcon from '@mui/icons-material/Place';
 import PaidIcon from '@mui/icons-material/Paid';
 import {blue} from '@mui/material/colors';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
 import {useAuthUser} from 'react-auth-kit'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 
-export default function AddActivities() {
+export default function ChangeActivities() {
 
     const auth = useAuthUser();
     const nav = useNavigate();
     const location = useLocation();
     const day = location.state.activitiesHours.split(",");
     const addLineBreak = (str) =>React.Children.toArray(str.split(' ').map((subStr) => {return (<><Grid item xs={6}>{subStr}</Grid></>);}));
-    const dayId = sessionStorage.getItem("storeDayId");
     const config = {     
       headers: { 'content-type': 'multipart/form-data' ,
       'Authorization': 'Bearer ' + auth().token} //Authorization
   }
-    const Add = async() =>{
+    const Change = async() =>{
       const data = new FormData();
       data.append("planType","ACTIVITIES");
       data.append("planEventId",location.state.activitiesId);
-      data.append("planDayId",dayId);
-      await axios.post("http://localhost:8080/planController/addPlan",data,config);
+      data.append("planId",location.state.planId);
+      await axios.post("http://localhost:8080/planController/changePlan",data,config);
       nav("/viewItinerary");
     }
   return (
@@ -101,7 +100,7 @@ export default function AddActivities() {
           </Grid>
           {location.state.activitiesDescription}
         </Grid>
-        <Button variant="outlined" onClick={Add}><AddIcon/>Add</Button>
+        <Button variant="outlined" onClick={Change}><ChangeCircleIcon/>Change</Button>
         </Box>
         </Box>
       </Box>

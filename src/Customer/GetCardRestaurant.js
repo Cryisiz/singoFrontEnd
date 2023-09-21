@@ -17,11 +17,11 @@ import { Link as aLink } from 'react-router-dom';
 export default function Restaurant(props){
     return(    <Grid item xs={12} sm={6} md={4}>
       <Card sx={{ maxWidth: 400,minWidth:300 }} >
-      <CardActionArea component={aLink} to="/addRestaurant" state={{ restaurantId: props.restaurantId,
+      <CardActionArea component={aLink} to="/restaurantDescription" state={{ restaurantId: props.restaurantId,
       restaurantName: props.restaurantName, restaurantType:props.restaurantType, 
       restaurantLocation:props.restaurantLocation, restaurantPrice:props.restaurantPrice,
       restaurantUrl:props.restaurantUrl,restaurantAddress:props.restaurantAddress,restaurantDescription:props.restaurantDescription,
-      restaurantPhone:props.restaurantPhone,restaurantHours:props.restaurantHours}}>
+      restaurantPhone:props.restaurantPhone,restaurantHours:props.restaurantHours,planId:props.planId}}>
           <CardMedia
             component="img"
             height="200"

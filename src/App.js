@@ -27,6 +27,12 @@ import DeleteRestaurant from "./Admin/Restaurant/DeleteRestaurant"
 import DayCustomer from "./Customer/DayCustomer"
 import ViewItinerary from "./Customer/ViewItinerary"
 import ActivitiesDescription from "./Activities/ActivitiesDescription"
+import RestaurantDescription from "./Restaurant/RestaurantDescription"
+import HotelDescription from "./Hotel/HotelDescription"
+import ViewChangeActivities from "./Activities/ViewChangeActivities"
+import ChangeActivities from "./Activities/ChangeActivities"
+import ViewChangeRestaurant from "./Restaurant/ViewChangeRestaurant"
+import ChangeRestaurant from "./Restaurant/ChangeRestaurant"
 
 export function App() {
   return (
@@ -50,6 +56,12 @@ export function App() {
             <Route path={'/addRestaurant'} element={ <RequireAuth loginPath={'/'}> <AddRestaurant/></RequireAuth>}/>
             {/*Edit and Delete*/}
             <Route path={'/activitiesDescription'} element={ <RequireAuth loginPath={'/'}> <ActivitiesDescription/></RequireAuth>}/>
+            <Route path={'/restaurantDescription'} element={ <RequireAuth loginPath={'/'}> <RestaurantDescription/></RequireAuth>}/>
+            <Route path={'/hotelDescription'} element={ <RequireAuth loginPath={'/'}> <HotelDescription/></RequireAuth>}/>
+            <Route path={'/viewChangeActivities'} element={ <RequireAuth loginPath={'/'}> <ViewChangeActivities/></RequireAuth>}/>
+            <Route path={'/changeActivities'} element={ <RequireAuth loginPath={'/'}> <ChangeActivities/></RequireAuth>}/>
+            <Route path={'/viewChangeRestaurant'} element={ <RequireAuth loginPath={'/'}> <ViewChangeRestaurant/></RequireAuth>}/>
+            <Route path={'/changeRestaurant'} element={ <RequireAuth loginPath={'/'}> <ChangeRestaurant/></RequireAuth>}/>
 
             {/*Admin*/}
             <Route path="/adminsignin" element={<AdminSignIn />} />

@@ -3,7 +3,7 @@ import {ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import defaultTheme from '../Component/Theme';
 import CssBaseline from '@mui/material/CssBaseline';
-import Appbar from '../Component/Appbar';
+import Appbar from '../Component/ItineraryAppbar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
@@ -34,19 +34,19 @@ export default function AddRestaurant() {
       headers: { 'content-type': 'multipart/form-data' ,
       'Authorization': 'Bearer ' + auth().token} //Authorization
   }
-    const Add = () =>{
+    const Add = async() =>{
       const data = new FormData();
       data.append("planType","RESTAURANT");
       data.append("planEventId",location.state.restaurantId);
       data.append("planDayId",dayId);
-      axios.post("http://localhost:8080/planController/addPlan",data,config);
+      await axios.post("http://localhost:8080/planController/addPlan",data,config);
       nav("/viewItinerary");
     }
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Appbar title = "Add Restaurant"/>
+        <Appbar title = "Restaurant"/>
         <Box
           component="main"
           sx={{

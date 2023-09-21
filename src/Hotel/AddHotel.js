@@ -35,11 +35,11 @@ export default function AddHotel() {
       headers: { 'content-type': 'multipart/form-data' ,
       'Authorization': 'Bearer ' + auth().token} //Authorization
   }
-    const Add = () =>{
+    const Add = async() =>{
       const data = new FormData();
       data.append("hotelId",location.state.hotelId);
       data.append("dayId",dayId);
-      axios.post("http://localhost:8080/dayController/addHotel",data,config);
+      await axios.post("http://localhost:8080/dayController/addHotel",data,config);
       nav("/viewItinerary");
     }
   return (

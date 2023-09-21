@@ -25,7 +25,7 @@ import GetCardRestaurant from'./GetCardRestaurant';
         {activitiesData.map((activities) => <GetCardActivities key={activities.activitiesId} activitiesId = {activities.activitiesId} activitiesName= {activities.activitiesName} activitiesType={activities.activitiesType} 
     activitiesLocation={activities.activitiesLocation} activitiesPrice={activities.activitiesPrice} activitiesUrl={activities.activitiesUrl}
     activitiesAddress={activities.activitiesAddress} activitiesDescription={activities.activitiesDescription} activitiesHours={activities.activitiesHours}
-    activitiesPhone={activities.activitiesPhone} planName={props.planName}
+    activitiesPhone={activities.activitiesPhone} planName={props.planName} planId={props.planId}
     />)}   
     </>
     ) ;
@@ -51,7 +51,7 @@ import GetCardRestaurant from'./GetCardRestaurant';
     {restaurantData.map((restaurant) => <GetCardRestaurant key={restaurant.restaurantId} restaurantId = {restaurant.restaurantId} restaurantName= {restaurant.restaurantName} restaurantType={restaurant.restaurantType} 
     restaurantLocation={restaurant.restaurantLocation} restaurantPrice={restaurant.restaurantPrice} restaurantUrl={restaurant.restaurantUrl}
     restaurantAddress={restaurant.restaurantAddress} restaurantDescription={restaurant.restaurantDescription} restaurantHours={restaurant.restaurantHours}
-    restaurantPhone={restaurant.restaurantPhone} planName={props.planName}
+    restaurantPhone={restaurant.restaurantPhone} planName={props.planName} planId={props.planId}
     />)}
     </>
   );

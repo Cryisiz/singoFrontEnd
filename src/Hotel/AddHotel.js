@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {ThemeProvider } from '@mui/material/styles';
-import Container from '@mui/material/Container';
 import defaultTheme from '../Component/Theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import Appbar from '../Component/ItineraryAppbar';
@@ -9,10 +8,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
 import {useLocation} from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import {blue} from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';

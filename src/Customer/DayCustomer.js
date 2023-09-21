@@ -7,7 +7,6 @@ import CardDay from './CardDay';
 import Appbar from '../Component/Appbar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import {useLocation} from 'react-router-dom';
 
 export default function DayCustomer() {
 

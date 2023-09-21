@@ -9,10 +9,6 @@ import AttractionsIcon from '@mui/icons-material/Attractions';
 import PlaceIcon from '@mui/icons-material/Place';
 import PaidIcon from '@mui/icons-material/Paid';
 import {blue} from '@mui/material/colors';
-import Button from '@mui/material/Button';
-import {useAuthUser} from 'react-auth-kit'
-import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 import { Link as aLink } from 'react-router-dom';
 export default function GetCardActivities(props){
 

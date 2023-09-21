@@ -14,8 +14,8 @@ export default function SignOut(){
     const auth = useAuthUser()
     //Authorization
 
-    const signOut = useSignOut()
-    const nav = useNavigate()
+    const signOut = useSignOut();
+    const nav = useNavigate();
     const formData = new FormData();
     formData.append("Authorization", 'Bearer ' + auth().token);
     const logOut = async() =>{

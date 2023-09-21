@@ -70,7 +70,7 @@ export default function CardCustomer() {
             </CardContent>
           </CardActionArea>
 
-          <Dialog open={open} onClose={handleClose}fullWidth={true}  maxWidth={'sm'} validate component="form" onSubmit={handleSubmit}>
+          <Dialog open={open} onClose={handleClose}fullWidth={true}  maxWidth={'sm'}  component="form" onSubmit={handleSubmit}>
             
         <DialogTitle>New Itinerary</DialogTitle>
         <DialogContent  >

@@ -98,7 +98,7 @@ function Itinerary(props){
         <Button color="primary" onClick={handleClickOpen1}>
           Add User
         </Button>
-      <Dialog open={open} onClose={handleClose}fullWidth={true}  maxWidth={'sm'} validate component="form" onSubmit={handleSubmit}>
+      <Dialog open={open} onClose={handleClose}fullWidth={true}  maxWidth={'sm'} component="form" onSubmit={handleSubmit}>
         
     <DialogTitle>Edit Itinerary</DialogTitle>
     <DialogContent  >
@@ -164,7 +164,7 @@ function Itinerary(props){
       <Button type="submit">Confirm</Button>
     </DialogActions>
   </Dialog>
-  <Dialog open={open1} onClose={handleClose1}fullWidth={true}  maxWidth={'sm'} validate component="form" onSubmit={handleSubmit1}>
+  <Dialog open={open1} onClose={handleClose1}fullWidth={true}  maxWidth={'sm'} component="form" onSubmit={handleSubmit1}>
         
         <DialogTitle>Add User</DialogTitle>
         <DialogContent  >

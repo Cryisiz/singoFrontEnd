@@ -32,7 +32,7 @@ function Hotel(props){
           <Typography gutterBottom variant="h5" component="div">
           {props.hotelName}
           </Typography>
-          <Typography variant="body2" color="text.secondary">         
+          <Typography variant="body2" color="text.secondary" component="span">         
            <Grid container rowSpacing={0} columnSpacing={2} alignItems="center">
               <Grid item sx={{ display: "flex", alignItems: "center" }}>
             <StarIcon style={{ color: blue[500] }}/> {props.hotelStar} star

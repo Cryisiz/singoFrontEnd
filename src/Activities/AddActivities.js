@@ -3,7 +3,7 @@ import {ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import defaultTheme from '../Component/Theme';
 import CssBaseline from '@mui/material/CssBaseline';
-import Appbar from '../Component/Appbar';
+import Appbar from '../Component/ItineraryAppbar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
@@ -19,11 +19,30 @@ import PaidIcon from '@mui/icons-material/Paid';
 import {blue} from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import {useAuthUser} from 'react-auth-kit'
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 export default function AddActivities() {
+
+    const auth = useAuthUser();
+    const nav = useNavigate();
     const location = useLocation();
     const day = location.state.activitiesHours.split(",");
-    const addLineBreak = (str) =>str.split(' ').map((subStr) => {return (<><Grid Item xs={6}>{subStr}</Grid></>);});
+    const addLineBreak = (str) =>React.Children.toArray(str.split(' ').map((subStr) => {return (<><Grid item xs={6}>{subStr}</Grid></>);}));
+    const dayId = sessionStorage.getItem("storeDayId");
+    const config = {     
+      headers: { 'content-type': 'multipart/form-data' ,
+      'Authorization': 'Bearer ' + auth().token} //Authorization
+  }
+    const Add = () =>{
+      const data = new FormData();
+      data.append("planType","ACTIVITIES");
+      data.append("planEventId",location.state.activitiesId);
+      data.append("planDayId",dayId);
+      axios.post("http://localhost:8080/dayController/addHotel",data,config);
+      nav("/viewItinerary");
+    }
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -41,7 +60,7 @@ export default function AddActivities() {
            <Toolbar />
            <Box
           sx={{
-            marginTop: 1,
+            marginTop: 5,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -63,13 +82,13 @@ export default function AddActivities() {
           </Grid>
           </Grid>
           <Grid item xs={6} sx={{ minWidth:350 }}>         
-            <Typography component="h2" variant="h5">
+            <Typography component="span" variant="h5" >
               {location.state.activitiesName}
             </Typography>
-            <Typography variant="subtitle1" paragraph>
-            <Grid container>
-            <Grid Item xs={3}>Address: </Grid><Grid Item xs={9}>{location.state.activitiesAddress}</Grid>
-            <Grid Item xs={6}> Phone: </Grid> <Grid Item xs={6}>{location.state.activitiesPhone}</Grid>
+            <Typography variant="subtitle1" paragraph component="span">
+            <Grid container >
+            <Grid item xs={3}>Address: </Grid><Grid item xs={9}>{location.state.activitiesAddress}</Grid>
+            <Grid item xs={6}> Phone: </Grid> <Grid item xs={6}>{location.state.activitiesPhone}</Grid>
               {(addLineBreak(day[0]))}
               {(addLineBreak(day[1]))}
               {(addLineBreak(day[2]))}
@@ -82,7 +101,7 @@ export default function AddActivities() {
           </Grid>
           {location.state.activitiesDescription}
         </Grid>
-        <Button variant="outlined"><AddIcon/>Add</Button>
+        <Button variant="outlined" onClick={Add}><AddIcon/>Add</Button>
         </Box>
         </Box>
       </Box>

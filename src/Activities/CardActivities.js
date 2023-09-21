@@ -29,10 +29,10 @@ function Activities(props){
           alt={props.activitiesName}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="span">
           {props.activitiesName}
           </Typography>
-          <Typography variant="body2" color="text.secondary">  
+          <Typography variant="body2" color="text.secondary" component="span">  
            <Grid container rowSpacing={0} columnSpacing={2}>
       <Grid item sx = {{ display: "flex", alignItems: "center" }}>
   <AttractionsIcon style={{ color: blue[500] }}/> {props.activitiesType} 

@@ -9,9 +9,6 @@ import StarIcon from '@mui/icons-material/Star';
 import PlaceIcon from '@mui/icons-material/Place';
 import PaidIcon from '@mui/icons-material/Paid';
 import {blue} from '@mui/material/colors';
-import axios from "axios";
-import  { useEffect, useState } from "react";
-import {useAuthUser} from 'react-auth-kit'
 import { Link as aLink } from 'react-router-dom';
 
 export default function GetCardHotel(props){

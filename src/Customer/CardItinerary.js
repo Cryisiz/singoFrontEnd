@@ -1,57 +1,57 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import StarIcon from '@mui/icons-material/Star';
-import PlaceIcon from '@mui/icons-material/Place';
-import PaidIcon from '@mui/icons-material/Paid';
-import {blue} from '@mui/material/colors';
 import axios from "axios";
 import  { useEffect, useState } from "react";
 import {useAuthUser} from 'react-auth-kit'
-import { Link as aLink } from 'react-router-dom';
+import GetCardActivities from './GetCardActivities';
+import GetCardHotel from './GetCardHotel';
 
-function Hotel(props){
-    return(    <Grid item xs={12} sm={6} md={4}>
-      <Card sx={{ maxWidth: 400,minWidth:300 }} >
-      <CardActionArea component={aLink} to="/addHotel" state={{ hotelId: props.hotelId,
-      hotelName: props.hotelName, hotelStar:props.hotelStar, 
-      hotelLocation:props.hotelLocation, hotelPrice:props.hotelPrice,
-      hotelUrl:props.hotelUrl,hotelAddress:props.hotelAddress,hotelDescription:props.hotelDescription,
-      hotelPhone:props.hotelPhone,hotelHours:props.hotelHours}}>
-          <CardMedia
-            component="img"
-            height="200"
-            image= {props.hotelUrl}
-            alt={props.hotelName}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-            {props.hotelName}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" component="span">         
-             <Grid container rowSpacing={0} columnSpacing={2} >
-                <Grid item sx={{ display: "flex", alignItems: "center" }}>
-              <StarIcon style={{ color: blue[500] }}/> {props.hotelStar} star
-              </Grid>
-              <Grid item sx={{ display: "flex", alignItems: "center" }}>
-              <PlaceIcon style={{ color: blue[500] }}/> {props.hotelLocation} 
-              </Grid>
-          <Grid item sx={{ display: "flex", alignItems: "center" }}>
-              <PaidIcon style={{ color: blue[500] }}/> SGD {props.hotelPrice}
-              </Grid>
-              </Grid>
-            </Typography>
-          </CardContent>
-          </CardActionArea>
-      </Card>
-      </Grid>  
-  
+  function Activities(props){
+    const auth = useAuthUser()
+    const [activitiesData, setActivitiesData] = useState([]);
+    //Authorization
+    const authHeader = {     
+      headers: { 
+      'Authorization': 'Bearer ' + auth().token}
+  }    
+    const data = new FormData();
+    data.append("activitiesId",props.planEventId);
+    axios.post("http://localhost:8080/activitiesController/getActivities",data,authHeader).then(response => setActivitiesData(response.data));
+    return( 
+        <>
+        {activitiesData.map((activities) => <GetCardActivities key={activities.activitiesId} activitiesId = {activities.activitiesId} activitiesName= {activities.activitiesName} activitiesType={activities.activitiesType} 
+    activitiesLocation={activities.activitiesLocation} activitiesPrice={activities.activitiesPrice} activitiesUrl={activities.activitiesUrl}
+    activitiesAddress={activities.activitiesAddress} activitiesDescription={activities.activitiesDescription} activitiesHours={activities.activitiesHours}
+    activitiesPhone={activities.activitiesPhone}
+    />)}   
+    </>
     ) ;
   }
+
+  function Restaurant(props) {
+  
+    const auth = useAuthUser()
+    const [restaurantData, setRestaurantData] = useState([]);
+
+    //Authorization
+    const authHeader = {     
+      headers: { 
+      'Authorization': 'Bearer ' + auth().token}
+  }
+
+    const data = new FormData();
+    data.append("restaurantId",props.planEventId);
+    axios.get("http://localhost:8080/restaurantController/getAll",data,authHeader).then(response => setRestaurantData(response.data));
+  return (
+    <>
+    {restaurantData.map((restaurant) => <Restaurant key={restaurant.restaurantId} restaurantId = {restaurant.restaurantId} restaurantName= {restaurant.restaurantName} restaurantType={restaurant.restaurantType} 
+    restaurantLocation={restaurant.restaurantLocation} restaurantPrice={restaurant.restaurantPrice} restaurantUrl={restaurant.restaurantUrl}
+    restaurantAddress={restaurant.restaurantAddress} restaurantDescription={restaurant.restaurantDescription} restaurantHours={restaurant.restaurantHours}
+    restaurantPhone={restaurant.restaurantPhone}
+    />)}
+    </>
+  );
+}
 
 export default function CardItinerary() {
 
@@ -59,6 +59,7 @@ export default function CardItinerary() {
     const [hotelData, setHotelData] = useState([]);
     const [dayData, setDayData] = useState([]);
     const [isFetched, setIsFetched] = useState(false);
+    const [planData, setPlanData] = useState([]);
     const dayId = sessionStorage.getItem("storeDayId");
 
     //Authorization
@@ -67,8 +68,7 @@ export default function CardItinerary() {
       'Authorization': 'Bearer ' + auth().token}
   }
     // fetch first time  component mounts
-    useEffect(() => {
-        
+    useEffect(() => { 
       const data = new FormData();
       data.append("dayId",dayId);
       axios.post("http://localhost:8080/dayController/getDay",data,authHeader).then(response =>{ 
@@ -82,6 +82,12 @@ export default function CardItinerary() {
         axios.post("http://localhost:8080/hotelController/getHotel",data1,authHeader).then(response => setHotelData(response.data));
         }
       }, [isFetched]);
+    
+    useEffect(() => {
+        const data = new FormData();
+        data.append("dayId",dayId);
+        axios.post("http://localhost:8080/planController/getAll",data,authHeader).then(response =>setPlanData(response.data))
+      }, []);
   
 
   return (
@@ -90,11 +96,20 @@ export default function CardItinerary() {
     spacing={4}
     justify="center"
   >
-    {hotelData.map((hotel) => <Hotel key={hotel.hotelId} hotelId = {hotel.hotelId} hotelName= {hotel.hotelName} hotelStar={hotel.hotelStar} 
+    {hotelData.map((hotel) => <GetCardHotel key={hotel.hotelId} hotelId = {hotel.hotelId} hotelName= {hotel.hotelName} hotelStar={hotel.hotelStar} 
     hotelLocation={hotel.hotelLocation} hotelPrice={hotel.hotelPrice} hotelUrl={hotel.hotelUrl}
     hotelAddress={hotel.hotelAddress} hotelDescription={hotel.hotelDescription} hotelHours={hotel.hotelHours}
     hotelPhone={hotel.hotelPhone}
     />)}
+
+    {planData.map((plan) => {
+        if(plan.planType === "ACTIVITIES"){
+        return <Activities key={plan.planId} planId={plan.planId} planType={plan.planType} planEventId={plan.planEventId} planDayId={plan.planDayId}/>
+        }else if(plan.planType === "HOTEL"){
+            return <Restaurant key={plan.planId} planId={plan.planId} planType={plan.planType} planEventId={plan.planEventId} planDayId={plan.planDayId}/>
+        }
+    }
+)}
     </Grid>
 
   );

@@ -45,17 +45,14 @@ export default function ActivitiesDescription() {
     const location = useLocation();
     const day = location.state.activitiesHours.split(",");
     const addLineBreak = (str) =>React.Children.toArray(str.split(' ').map((subStr) => {return (<><Grid item xs={6}>{subStr}</Grid></>);}));
-    const dayId = sessionStorage.getItem("storeDayId");
     const config = {     
       headers: { 'content-type': 'multipart/form-data' ,
       'Authorization': 'Bearer ' + auth().token} //Authorization
   }
-    const Remove = () =>{
+    const Remove = async() =>{
       const data = new FormData();
-      data.append("planType","ACTIVITIES");
-      data.append("planEventId",location.state.activitiesId);
-      data.append("planDayId",dayId);
-      axios.post("http://localhost:8080/planController/addPlan",data,config);
+      data.append("planId",location.state.planId);
+      await axios.post("http://localhost:8080/planController/deletePlan",data,config);
       nav("/viewItinerary");
     }
   return (

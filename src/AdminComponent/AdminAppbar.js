@@ -20,6 +20,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import {blue} from '@mui/material/colors'
 import { useNavigate } from 'react-router-dom';
+import {useAuthUser} from 'react-auth-kit'
 
 const drawerWidth = 240;
 
@@ -73,6 +74,12 @@ export default function Appbar(props) {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const auth = useAuthUser()
+  React.useEffect(() => {
+    if(auth().role !=="ADMIN"){
+      nav("/");
+    }
+  },[]);
 
   return (
     <React.Fragment>

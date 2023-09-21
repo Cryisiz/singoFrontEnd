@@ -73,10 +73,14 @@ function Itinerary(props){
         axios.post("http://localhost:8080/itineraryController/delete",data,authHeader);
         window.location.reload(); 
       }
+      const storeId = ()=>{
+        sessionStorage.setItem("storeItineraryId", props.itineraryId);
+        navigate("/dayCustomer");
+      }
   return( 
     <Grid item xs={12} sm={6} md={4}>
     <Card sx={{ maxWidth: 400, minWidth: 300 }}>
-      <CardActionArea component={aLink} to="/dayCustomer" state={{itineraryId:props.itineraryId}}>
+      <CardActionArea onClick={storeId}>
         <CardMedia
           component="img"
           height="200"

@@ -49,10 +49,11 @@ function Day(props){
   ) ;
 }
 
-export default function CardDay(props) {
+export default function CardDay() {
     
     const auth = useAuthUser()
     const [dayData, setDayData] = useState([]);
+    const itineraryId = sessionStorage.getItem("storeItineraryId");
 
     //Authorization
     const authHeader = {     
@@ -63,7 +64,7 @@ export default function CardDay(props) {
     // make the fetch the first time your component mounts
     useEffect(() => {
       const data = new FormData();
-      data.append("dayItineraryId",props.itineraryId);
+      data.append("dayItineraryId",itineraryId);
       axios.post("http://localhost:8080/dayController/getAll",data,authHeader)
       .then(response => setDayData(response.data));
     }, []);

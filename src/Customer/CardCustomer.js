@@ -16,7 +16,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-import { useNavigate} from 'react-router-dom'
 import AllCardCustomer from "./AllCardCustomer";
 
 export default function CardCustomer() {
@@ -31,7 +30,6 @@ export default function CardCustomer() {
     const handleClose = () => {
       setOpen(false);
     };
-    const navigate = useNavigate()
     const auth = useAuthUser()
 
     //Authorization

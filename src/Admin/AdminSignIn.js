@@ -31,9 +31,9 @@ export default function AdminSignIn() {
     const res = await axios.post(
     "http://localhost:8080/auth/authenticate",user);
     signIn({
-      token: res.access_token,
+      token: res.data.access_token,
       tokenType: 'Bearer',   
-      authState: {name: data.get('email'),role:'ADMIN'},
+      authState: {name: data.get('email'),role:'ADMIN',token:res.data.access_token},
       expiresIn: 1440 
     }).then(
       navigate('/adminhome'));

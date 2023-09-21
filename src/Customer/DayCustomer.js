@@ -10,7 +10,6 @@ import Toolbar from '@mui/material/Toolbar';
 import {useLocation} from 'react-router-dom';
 
 export default function DayCustomer() {
-    const location = useLocation();
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -29,7 +28,7 @@ export default function DayCustomer() {
         
            <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <CardDay key={location.state.itineraryId} itineraryId={location.state.itineraryId}/>
+          <CardDay />
             </Container>
         </Box>
       </Box>

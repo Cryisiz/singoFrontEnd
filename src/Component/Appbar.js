@@ -11,7 +11,6 @@ import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import ListItems from '../Component/ListItems';
 import SignOut from '../Account/SignOut';
 import Copyright from './Copyright';
 import HomeIcon from '@mui/icons-material/Home';
@@ -20,6 +19,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import {blue} from '@mui/material/colors'
 import { useNavigate } from 'react-router-dom';
+import {useAuthUser} from 'react-auth-kit'
 
 const drawerWidth = 240;
 
@@ -74,6 +74,12 @@ export default function Appbar(props) {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const auth = useAuthUser()
+  React.useEffect(() => {
+    if(auth().role !=="USER"){
+      nav("/");
+    }
+  },[]);
 
   return (
     <React.Fragment>
@@ -134,8 +140,6 @@ export default function Appbar(props) {
       <ListItemText primary="Home"/>
     </ListItemButton>
     <Divider sx={{ my: 1 }} />
-      <ListItems/>
-      <Divider sx={{ my: 1 }} />
       <SignOut/>
     </List>
     <Divider sx={{ my: 1 }} />

@@ -23,6 +23,9 @@ import HotelIcon from '@mui/icons-material/Hotel';
 import SnowboardingIcon from '@mui/icons-material/Snowboarding';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import { Link as aLink } from 'react-router-dom';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import {useAuthUser} from 'react-auth-kit'
 
 const drawerWidth = 240;
 
@@ -77,6 +80,12 @@ export default function ItineraryAppbar(props) {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const auth = useAuthUser()
+  React.useEffect(() => {
+    if(auth().role !=="USER"){
+      nav("/");
+    }
+  },[]);
 
   return (
     <React.Fragment>
@@ -130,6 +139,18 @@ export default function ItineraryAppbar(props) {
     </Toolbar>
     <Divider />
     <List component="nav">
+    <ListItemButton onClick={() => {nav("/viewItinerary");}}>
+      <ListItemIcon>
+        <FormatListBulletedIcon style={{ color: blue[500] }}/>
+      </ListItemIcon>
+      <ListItemText primary="Itinerary"/>
+    </ListItemButton>
+    <ListItemButton onClick={() => {nav("/dayCustomer");}}>
+      <ListItemIcon>
+        <CalendarTodayIcon style={{ color: blue[500] }}/>
+      </ListItemIcon>
+      <ListItemText primary="Day"/>
+    </ListItemButton>
     <ListItemButton onClick={() => {nav("/home");}}>
       <ListItemIcon>
         <HomeIcon style={{ color: blue[500] }}/>

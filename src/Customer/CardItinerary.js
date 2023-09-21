@@ -5,6 +5,7 @@ import  { useEffect, useState } from "react";
 import {useAuthUser} from 'react-auth-kit'
 import GetCardActivities from './GetCardActivities';
 import GetCardHotel from './GetCardHotel';
+import GetCardRestaurant from'./GetCardRestaurant';
 
   function Activities(props){
     const auth = useAuthUser()
@@ -14,15 +15,17 @@ import GetCardHotel from './GetCardHotel';
       headers: { 
       'Authorization': 'Bearer ' + auth().token}
   }    
+  useEffect(()=>{
     const data = new FormData();
     data.append("activitiesId",props.planEventId);
     axios.post("http://localhost:8080/activitiesController/getActivities",data,authHeader).then(response => setActivitiesData(response.data));
+  },[]);
     return( 
         <>
         {activitiesData.map((activities) => <GetCardActivities key={activities.activitiesId} activitiesId = {activities.activitiesId} activitiesName= {activities.activitiesName} activitiesType={activities.activitiesType} 
     activitiesLocation={activities.activitiesLocation} activitiesPrice={activities.activitiesPrice} activitiesUrl={activities.activitiesUrl}
     activitiesAddress={activities.activitiesAddress} activitiesDescription={activities.activitiesDescription} activitiesHours={activities.activitiesHours}
-    activitiesPhone={activities.activitiesPhone}
+    activitiesPhone={activities.activitiesPhone} planName={props.planName} planId={props.planId}
     />)}   
     </>
     ) ;
@@ -38,16 +41,17 @@ import GetCardHotel from './GetCardHotel';
       headers: { 
       'Authorization': 'Bearer ' + auth().token}
   }
-
+  useEffect(() => {
     const data = new FormData();
     data.append("restaurantId",props.planEventId);
-    axios.get("http://localhost:8080/restaurantController/getAll",data,authHeader).then(response => setRestaurantData(response.data));
+    axios.post("http://localhost:8080/restaurantController/getRestaurant",data,authHeader).then(response => setRestaurantData(response.data));
+  },[]);
   return (
     <>
-    {restaurantData.map((restaurant) => <Restaurant key={restaurant.restaurantId} restaurantId = {restaurant.restaurantId} restaurantName= {restaurant.restaurantName} restaurantType={restaurant.restaurantType} 
+    {restaurantData.map((restaurant) => <GetCardRestaurant key={restaurant.restaurantId} restaurantId = {restaurant.restaurantId} restaurantName= {restaurant.restaurantName} restaurantType={restaurant.restaurantType} 
     restaurantLocation={restaurant.restaurantLocation} restaurantPrice={restaurant.restaurantPrice} restaurantUrl={restaurant.restaurantUrl}
     restaurantAddress={restaurant.restaurantAddress} restaurantDescription={restaurant.restaurantDescription} restaurantHours={restaurant.restaurantHours}
-    restaurantPhone={restaurant.restaurantPhone}
+    restaurantPhone={restaurant.restaurantPhone} planName={props.planName} planId={props.planId}
     />)}
     </>
   );
@@ -104,9 +108,11 @@ export default function CardItinerary() {
 
     {planData.map((plan) => {
         if(plan.planType === "ACTIVITIES"){
-        return <Activities key={plan.planId} planId={plan.planId} planType={plan.planType} planEventId={plan.planEventId} planDayId={plan.planDayId}/>
-        }else if(plan.planType === "HOTEL"){
-            return <Restaurant key={plan.planId} planId={plan.planId} planType={plan.planType} planEventId={plan.planEventId} planDayId={plan.planDayId}/>
+        return <Activities key={plan.planId} planId={plan.planId} planName={plan.planName}
+         planType={plan.planType} planEventId={plan.planEventId} planDayId={plan.planDayId}/>
+        }else if(plan.planType === "RESTAURANT"){
+            return <Restaurant key={plan.planId} planId={plan.planId} planName={plan.planName} 
+            planType={plan.planType} planEventId={plan.planEventId} planDayId={plan.planDayId}/>
         }
     }
 )}

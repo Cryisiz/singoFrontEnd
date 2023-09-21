@@ -18,13 +18,28 @@ import PlaceIcon from '@mui/icons-material/Place';
 import PaidIcon from '@mui/icons-material/Paid';
 import {blue} from '@mui/material/colors';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
 import {useAuthUser} from 'react-auth-kit'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import Stack from '@mui/material/Stack';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { Link as aLink } from 'react-router-dom';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
 
-export default function AddActivities() {
+export default function ActivitiesDescription() {
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
     const auth = useAuthUser();
     const nav = useNavigate();
     const location = useLocation();
@@ -35,12 +50,12 @@ export default function AddActivities() {
       headers: { 'content-type': 'multipart/form-data' ,
       'Authorization': 'Bearer ' + auth().token} //Authorization
   }
-    const Add = async() =>{
+    const Remove = () =>{
       const data = new FormData();
       data.append("planType","ACTIVITIES");
       data.append("planEventId",location.state.activitiesId);
       data.append("planDayId",dayId);
-      await axios.post("http://localhost:8080/planController/addPlan",data,config);
+      axios.post("http://localhost:8080/planController/addPlan",data,config);
       nav("/viewItinerary");
     }
   return (
@@ -101,7 +116,48 @@ export default function AddActivities() {
           </Grid>
           {location.state.activitiesDescription}
         </Grid>
-        <Button variant="outlined" onClick={Add}><AddIcon/>Add</Button>
+        <Stack spacing={2} direction="row">
+        <Button variant="outlined" onClick={handleClickOpen}><ChangeCircleIcon/>Change</Button>
+        <Button variant="outlined" onClick={Remove}><HighlightOffIcon/>Remove</Button>
+        </Stack>
+        <Dialog open={open} onClose={handleClose} fullWidth={true}  maxWidth={'sm'}>
+        <DialogTitle>Change To</DialogTitle>
+        <DialogContent>
+        <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea component={aLink} to="/viewChangeActivities" state={{planId:location.state.planId}}>
+        <CardMedia
+          component="img"
+          height="140"
+          image="ActivitiesImage.jpg"
+          alt="activitiesImage"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Activities
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+    <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea component={aLink} to="/viewChangeRestaurant" state={{planId:location.state.planId}}>
+        <CardMedia
+          component="img"
+          height="140"
+          image="RestaurantImage.jpg"
+          alt="restaurantImage"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Restaurant
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
         </Box>
         </Box>
       </Box>

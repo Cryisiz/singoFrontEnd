@@ -16,6 +16,7 @@ import {useAuthUser} from 'react-auth-kit'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import AttractionsIcon from '@mui/icons-material/Attractions';
 
 export default function ChangeActivities() {
 
